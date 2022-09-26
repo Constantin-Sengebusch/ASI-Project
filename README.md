@@ -1,4 +1,6 @@
 # ASI-Project
 Repository for ASI Project
 
-This is first commit
+Here is all the scripts for ASI Project. 
+
+Discover more on https://asi-project.org

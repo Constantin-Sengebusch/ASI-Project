@@ -1,6 +1,7 @@
 # ASI-Project
-Repository for ASI Project
 
-Here is all the scripts for ASI Project. 
+This repository group all the code of ASI Project.
 
-Discover more on https://asi-project.org
+Start you journey with mainScript.py.
+
+Discover more about the project on https://asi-project.org

@@ -1,7 +1,8 @@
 # ASI-Project
 
-This repository group all the code of ASI Project.
+This repository groups all the parts to build the virtual assistant ASI.
 
-Start you journey with mainScript.py.
+Start your journey with mainScript.py.
 
-Discover more about the project on https://asi-project.org
+Discover more about the project at https://asi-project.org
+

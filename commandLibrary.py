@@ -28,10 +28,6 @@ with open('config_params.json', 'r') as f:
 with open('config_credentials.json', 'r') as f:
   config_credentials = json.load(f)
 
-# Define all different command
-
-## To do: 1) add more functions 2) add name to helpCommand
-
 
 def errorMessage():
     '''

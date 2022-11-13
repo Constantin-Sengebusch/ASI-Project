@@ -1,16 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[7]:
-
-
-'''
-To do: add more functions + complete liste "choices"
-
-Define command from user store in SQL
-2 inputs (First for command and second for details)
-'''
-
 import commandLibrary as cl
 from fuzzywuzzy import process
 import json

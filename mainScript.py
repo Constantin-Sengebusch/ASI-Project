@@ -109,7 +109,8 @@ def nameCommand(entry, secondEntry):
             return cl.errorMessage()
     else:
         try:
-            return cl.getAnswerGoogle(entry)
+            #return cl.getAnswerGoogle(entry)
+            return cl.get_answer_chatgpt(entry)
         except:
             return cl.errorMessage()
 

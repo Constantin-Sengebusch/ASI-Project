@@ -21,6 +21,7 @@ from bs4 import BeautifulSoup
 import wolframalpha
 import spacy
 import json
+import openai
 
 with open('config_params.json', 'r') as f:
   config_params = json.load(f)
@@ -360,4 +361,16 @@ def getAnswerGoogle(text):
                 
             except:
                 return "Sorry, I could not find an answer on the search engine. Please be more precise or try to find an answer on Wikipedia. You can also ask for help if you need."
+    
+
+ def get_answer_chatgpt(text):
+    """
+    This function use OPEN AI to answer every unanswered questions
+    """
+    # Load your API key from an environment variable or secret management service
+    openai.api_key = config_credentials['chat_gpt']
+
+    response = openai.Completion.create(model="text-davinci-003", prompt=text, temperature=0, max_tokens=200)
+
+    return response['choices'][0]['text']
     

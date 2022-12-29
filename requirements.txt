@@ -1,0 +1,16 @@
+fuzzywuzzy
+json
+flask
+requests
+urllib3
+PyDictionary
+googletrans
+CurrencyConverter
+random2
+ssl
+wikipedia
+bs4
+wolframalpha
+spacy
+subprocess.run
+openai

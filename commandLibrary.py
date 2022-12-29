@@ -173,8 +173,8 @@ def randomHello():
     '''
     Answer with a random "Hello"
     '''
-    choicesHello = ["Greetings, Boss!", "Hi Constantin!", "Welcome Back, Sir!",
-                    "Bonjour Monsieur!", "Hello, Sir!", "Hey, Boss!"]
+    choicesHello = ["Greetings!", "Hi!", "Welcome Back!",
+                    "Bonjour!", "Hello!", "Hey!"]
     answerRandom = random.choice(choicesHello)
     return answerRandom 
 
@@ -183,9 +183,9 @@ def randomWelcome():
     '''
     Answer with a random "You are welcome"
     '''
-    choicesWelcome = ["You got it, Boss!", "Don’t mention it!", "No worries!",
+    choicesWelcome = ["You got it!", "Don’t mention it!", "No worries!",
                       "Not a problem!", "My pleasure!", "It was nothing!",
-                      "I’m happy to help!", "Sure!", "Anytime, Sir!"]
+                      "I’m happy to help!", "Sure!", "Anytime!"]
 
     answerRandom = random.choice(choicesWelcome)
 

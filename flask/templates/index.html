@@ -1,0 +1,63 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <link rel="stylesheet" href="static/style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <title>ASI Project</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-10 mr-auto ml-auto">
+    <h1>ASI Project</h1>    
+    <form>
+        <div id="chatbox">
+            <div class="col-md-8 ml-auto mr-auto">
+              <p class="botText"><span>Hi traveler! I am Asi, your virtual assistant. What information do you need today?</span></p>
+            </div>
+        </div>
+        <div id="userInput" class="row">
+            <div class="col-md-10">
+                <input id="text" type="text" name="msg" placeholder="Ask me a question and press Enter" class="form-control">
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("form").on("submit", function(event) {
+            var rawText = $("#text").val();
+            var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
+            $("#text").val("");
+            $("#chatbox").append(userHtml);
+            document.getElementById("userInput").scrollIntoView({
+                block: "start",
+                behavior: "smooth",
+            });
+            $.ajax({
+                data: {
+                    msg: rawText,
+                },
+                type: "POST",
+                url: "/get",
+            }).done(function(data) {
+                var botHtml = '<p class="botText"><span>' + data + "</span></p>";
+                $("#chatbox").append($.parseHTML(botHtml));
+                document.getElementById("userInput").scrollIntoView({
+                    block: "start",
+                    behavior: "smooth",
+                });
+            });
+            event.preventDefault();
+        });
+    });
+</script>
+</body>
+
+</html>

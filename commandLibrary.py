@@ -24,10 +24,10 @@ import json
 import openai
 
 with open('config_params.json', 'r') as f:
-  config_params = json.load(f)
+    config_params = json.load(f)
 
 with open('config_credentials.json', 'r') as f:
-  config_credentials = json.load(f)
+    config_credentials = json.load(f)
 
 
 def errorMessage():
@@ -37,44 +37,56 @@ def errorMessage():
     url = "https://themarkettrend.org"
     timeout = 5
     try:
-        request = requests.get(url, timeout=timeout)
+        requests.get(url, timeout=timeout)
         errorMessage = ("Data is unavailable for the moment (unknown reason).")
     except (requests.ConnectionError, requests.Timeout) as exception:
         errorMessage = ("Data is unavailable for the moment due to no internet connection. Answer 'Help' to discover offline tools")
     return errorMessage
-
 
 # Get documentation for help 
 def helpCommand():
     return config_params['help']
 
     
-def nextBirthday():
+def nextBirthday(name = ""):
     '''
     Get next birthday
     '''
-    jourAnniversary = pd.read_excel(r'data/birthday.xlsx')
+    jourAnniversary = pd.read_csv(r'data/birthday.csv', sep=";")
     jourAnniversary['Date'] = pd.to_datetime(jourAnniversary['Date']).dt.strftime('%m/%d/%Y')
     jourAnniversary = jourAnniversary.sort_values(by='Date').reset_index(drop=True)
     dateToday = datetime.now().strftime('%m/%d')
-    
-    # Find next name and date
-    try:
-        nextName = jourAnniversary['Nom'][jourAnniversary['Date'] > dateToday].iloc[0]
-        nextDate = jourAnniversary['Date'][jourAnniversary['Date'] > dateToday].iloc[0]
-    except:
-        nextName = jourAnniversary['Nom'].iloc[0]
-        nextDate = jourAnniversary['Date'].iloc[0]
-    nextDateRaw = datetime.strptime(nextDate,'%m/%d/%Y')
-    nextDate = datetime.strptime(nextDate,'%m/%d/%Y').strftime('%d %B')    
-    
-    # Compute the age
-    today = date.today()
-    age = today.year - nextDateRaw.year - ((today.month, today.day) < (nextDateRaw.month, nextDateRaw.day))
-    
-    textAnswer = f"The next birthday day will be the one of {nextName} on the {nextDate} and will turn {age}."
-    #return textAnswer
-    return textAnswer
+
+    if name == "":
+        # Find next name and date
+        try:
+            nextName = jourAnniversary['Name'][jourAnniversary['Date'] > dateToday].iloc[0]
+            nextDate = jourAnniversary['Date'][jourAnniversary['Date'] > dateToday].iloc[0]
+        except:
+            nextName = jourAnniversary['Name'].iloc[0]
+            nextDate = jourAnniversary['Date'].iloc[0]
+        nextDateRaw = datetime.strptime(nextDate,'%m/%d/%Y')
+        nextDate = datetime.strptime(nextDate,'%m/%d/%Y').strftime('%d %B')    
+        
+        # Compute the age
+        today = date.today()
+        age = today.year - nextDateRaw.year - ((today.month, today.day) < (nextDateRaw.month, nextDateRaw.day))
+        
+        textAnswer = f"The next birthday day will be the one of {nextName} on the {nextDate}. She/He will turn {age}."
+        #return textAnswer
+        return textAnswer
+    else:
+        dateBirth = jourAnniversary[jourAnniversary['Name'] == "Simon"]['Date'].iloc[0]
+        nextDateRaw = datetime.strptime(dateBirth,'%m/%d/%Y')
+        nextDate = datetime.strptime(dateBirth,'%m/%d/%Y').strftime('%d %B') 
+        
+        # Compute the age
+        today = date.today()
+        age = today.year - nextDateRaw.year - ((today.month, today.day) < (nextDateRaw.month, nextDateRaw.day))
+
+        textAnswer = f"The birthday day of {name} will be on the {nextDate}. She/He will turn {age}."
+        #return textAnswer
+        return textAnswer
 
 
 def getTime():
@@ -116,7 +128,6 @@ def getTranslation(text, destLang):
     textTranslated = translation.text
     return textTranslated
 
-
 def convertCurrency(amount, currency):
     '''
     Convert Currency
@@ -128,15 +139,6 @@ def convertCurrency(amount, currency):
     currDest = currency[1]
     result = str(round(c.convert(float(amount), currSrc, currDest), 2)) + ' ' + currDest
     return result
-
-def calculator(computation):
-    '''
-    Make computations
-    '''
-    computation = str(computation)
-    computation = eval(computation)
-    return computation
-
 
 def getNews():    
     '''
@@ -252,7 +254,7 @@ def getAnswerWikipedia(keyword):
             result = wikipedia.summary(keyword, sentences = 2)
             return result
         except:
-            return 'Sorry, I could not find a result on Wikipedia. Please reformulate your question.'
+            return 'Sorry, I could not find a result on Wikipedia. Please reformulate your query.'
 
 
 def daterange(date1, date2):
@@ -361,9 +363,9 @@ def getAnswerGoogle(text):
                 
             except:
                 return "Sorry, I could not find an answer on the search engine. Please be more precise or try to find an answer on Wikipedia. You can also ask for help if you need."
-    
 
- def get_answer_chatgpt(text):
+
+def get_answer_chatgpt(text):
     """
     This function use OPEN AI to answer every unanswered questions
     """

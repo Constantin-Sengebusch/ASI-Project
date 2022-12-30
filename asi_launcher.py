@@ -10,4 +10,3 @@ import mainScript as ms
 
 while True:
     print(ms.mainScript(input()))
-

@@ -6,7 +6,7 @@ from fuzzywuzzy import process
 import json
 
 with open('config_params.json', 'r') as f:
-  config_params = json.load(f)
+    config_params = json.load(f)
 
 
 def analyseCommand(messageInput):
@@ -54,11 +54,6 @@ def nameCommand(entry, secondEntry):
     '''
     if entry == 'hello' or entry == 'goodmorning' or entry == 'hi' or entry == 'hey':
         return cl.randomHello()
-    if entry == 'investmentreport':
-        try:
-            return cl.investmentReport()
-        except:
-            return cl.errorMessage()
     if entry == 'help':
         return cl.helpCommand()
     if entry == 'whoareyou' or entry == 'name':
@@ -70,7 +65,7 @@ def nameCommand(entry, secondEntry):
     if entry == 'whereareyou':
         return config_params['whereareyou']
     if entry == 'nextbirthday':
-        return cl.nextBirthday()
+        return cl.nextBirthday(secondEntry)
     if entry == 'time':
         return cl.getTime()
     if entry == 'date':
@@ -94,8 +89,6 @@ def nameCommand(entry, secondEntry):
             return cl.convertCurrency(secondEntry[0], secondEntry[1])
         except:
             return cl.errorMessage()
-    if entry == 'calculator':
-        return cl.calculator(secondEntry)
     if entry == 'news':
         try:
             return cl.getNews()
@@ -126,11 +119,9 @@ def mainScript(entryInput):
         entrySplit = entryInput.split(": ")
         entry = entrySplit[0]
         parametersEntry = entrySplit[1]
-        
     else:
         entry = entryInput
         parametersEntry = ''
 
     # Return the command
     return nameCommand(analyseCommand(entry), parametersEntry)
-

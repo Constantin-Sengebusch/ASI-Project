@@ -18,8 +18,8 @@ def analyseCommand(messageInput):
     If the analysis is not sure enough it will return an error message.
     '''
 
-    choices = ['hello', 'hi', 'hey', 'news', 'help', 'calculator', 
-               'definition', 'convertcurrency', 'translation',
+    choices = ['hello', 'hi', 'hey', 'news', 'help', 'calculator',
+               'definition', 'convertcurrency', 'translation', 'compute',
                'nextbirthday', 'time', 'date', 'goodmorning', 'thankyou',
               'whoareyou', 'whocreatedyou', 'whatsyourpurpose', 'whereareyou',
               'wikipedia', 'name']
@@ -84,6 +84,11 @@ def nameCommand(entry, secondEntry):
         secondEntry = defineSecondEntry(secondEntry)
         try:
             return cl.getTranslation(secondEntry[0], secondEntry[1])
+        except:
+            return cl.errorMessage()
+    if entry == 'calculator' or entry == 'compute':
+        try:
+            return cl.getAnswerWolframalpha(secondEntry)
         except:
             return cl.errorMessage()
     if entry == 'convertcurrency':

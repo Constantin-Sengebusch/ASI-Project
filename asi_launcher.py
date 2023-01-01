@@ -6,7 +6,7 @@
 This script aims to launch ASI.
 """
 
-import mainScript as ms
+import main_script as ms
 
 while True:
     print(ms.mainScript(input()))

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import mainScript as ms
+import main_script as ms
 
 #Flask initialization
 app = Flask(__name__)

@@ -4,8 +4,11 @@
 import commandLibrary as cl
 from fuzzywuzzy import process
 import json
+import os
 
-with open('config_params.json', 'r') as f:
+curr_path = os. getcwd()
+
+with open(f'{curr_path}/config_params.json', 'r') as f:
     config_params = json.load(f)
 
 

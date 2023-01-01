@@ -22,11 +22,14 @@ import wolframalpha
 import spacy
 import json
 import openai
+import os
 
-with open('config_params.json', 'r') as f:
+curr_path = os. getcwd()
+
+with open(f'{curr_path}/config_params.json', 'r') as f:
     config_params = json.load(f)
 
-with open('config_credentials.json', 'r') as f:
+with open(f'{curr_path}/config_credentials.json', 'r') as f:
     config_credentials = json.load(f)
 
 

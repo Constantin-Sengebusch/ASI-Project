@@ -56,7 +56,7 @@ def nextBirthday(name = ""):
     Get next birthday
     '''
     jourAnniversary = pd.read_csv(r'data/birthday.csv', sep=";")
-    jourAnniversary['Date'] = pd.to_datetime(jourAnniversary['Date']).dt.strftime('%m/%d/%Y')
+    jourAnniversary['Date'] = pd.to_datetime(jourAnniversary['Date'], format='%d/%m/%Y').dt.strftime('%m/%d/%Y')
     jourAnniversary = jourAnniversary.sort_values(by='Date').reset_index(drop=True)
     dateToday = datetime.now().strftime('%m/%d')
 

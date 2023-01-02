@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import commandLibrary as cl
+import command_library as cl
 from fuzzywuzzy import process
 import json
 import os
@@ -22,7 +22,7 @@ def analyseCommand(messageInput):
                'definition', 'convertcurrency', 'translation', 'compute',
                'nextbirthday', 'time', 'date', 'goodmorning', 'thankyou',
               'whoareyou', 'whocreatedyou', 'whatsyourpurpose', 'whereareyou',
-              'wikipedia', 'name']
+              'wikipedia', 'name', 'howareyou']
 
     resultInput = process.extractOne(messageInput, choices)
 
@@ -69,6 +69,8 @@ def nameCommand(entry, secondEntry):
         return config_params['whereareyou']
     if entry == 'nextbirthday':
         return cl.nextBirthday(secondEntry)
+    if entry == 'howareyou':
+        return config_params['howareyou']
     if entry == 'time':
         return cl.getTime()
     if entry == 'date':
